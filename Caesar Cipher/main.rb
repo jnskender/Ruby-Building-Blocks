@@ -34,5 +34,5 @@ phrase = gets.chomp
 puts "Please enter how many shifts to be used"
 shift = gets.chomp.to_i
 
-
+puts "Encrypted Code:"
 caesar_cipher(phrase,shift)
