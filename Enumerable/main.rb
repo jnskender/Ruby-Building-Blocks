@@ -16,19 +16,19 @@ module Enumerable
 
     def my_select
       values =[]
-      self.my_each {|x| values << x if yield(x)}
+      self.my_each {|x| values << x if yield x}
       values
     end
 
-    def my_all
-      values = []
-      self.my_each {|x| values << false if !yield(x)}
+    def my_all?
+      self.my_each {|x| return false unless yield x}
+      true
     end
 
 end
 
-array = [0,1,2,3]
 =begin
+array = [0,1,2,3]
 puts '----------Each-----------'
 array.each { |x| puts x }
 puts "\n---------My_Each---------"
@@ -44,5 +44,8 @@ array.select { |x| puts x if x.even?  }   #=> [2, 4]
 puts '----------My_Select-----------'
 array.my_select { |x| puts x if x.even?  }   #=> [2, 4]
 =end
-puts '----------Any?-----------'
-%w[any bear cat].any? { |x| puts x.length >= 4 }   #=> [true]
+array = ["1234","1234"]
+puts '----------All?-----------'
+puts array.all? { |x| x.length >= 4 }   #=> [true]
+puts '----------My_All?-----------'
+puts array.my_all? { |x| x.length >= 4 }   #=> [true]
