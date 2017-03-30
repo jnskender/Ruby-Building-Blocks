@@ -4,11 +4,11 @@ def caesar_cipher(phrase, shift_num = 1)
     cypher = []
 
     phrase.each do |char|
-        index = alphabet.index(char.downcase)
+        index = alphabet.index(char.downcase) #position in alphabet 0-25
         if char == ' '
             cypher.push(' ')
             next
-        elsif index + shift_num > 25
+        elsif index + shift_num > 25 #if shift must wrap back around to beginning of alphabet
             position = (shift_num - 1) - (25 - index)
         else
             position = index + shift_num
@@ -20,19 +20,9 @@ def caesar_cipher(phrase, shift_num = 1)
             cypher.push(alphabet[position])
         end
     end
-  puts cypher.join('')
+   cypher.join('')
 end
 
 def isUpper?(char)
     char == char.upcase
 end
-
-puts"-----------Caesar-Cipher---------------"
-puts "Please enter a phrase to be Encrypted with the Caesar cipher"
-phrase = gets.chomp
-
-puts "Please enter how many shifts to be used"
-shift = gets.chomp.to_i
-
-puts "Encrypted Code:"
-caesar_cipher(phrase,shift)
