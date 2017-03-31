@@ -1,13 +1,18 @@
 
 module Enumerable
     def my_each
-        for i in 0...length do
-            yield self.to_a[i]
+        if block_given?
+          for i in 0...length do
+              yield self.to_a[i]
+          end
+        else
+          return self.to_enum
         end
         self
     end
 
     def my_each_with_index
+      return self.to_enum unless block_given?
       for i in 0...length do
           yield self[i] , index(i)
       end
@@ -15,6 +20,7 @@ module Enumerable
     end
 
     def my_select
+      return self.to_enum unless block_given?
       result =[]
       self.my_each {|x| result << x if yield x}
       result
